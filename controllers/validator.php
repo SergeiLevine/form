@@ -4,6 +4,7 @@ class Validator {
     private $errors = [];
     private static $fields = ['first_name','last_name','country','phone_number','email'];
 
+    //pulling POST data
     public function __construct($post_data){
         $this->data = $post_data;
     }
@@ -22,6 +23,7 @@ class Validator {
         $this->validateCountry();
         $this->validatePhoneNumber();
         $this->validateEmail();
+        
         //returning array of errors if any were created
         return $this->$errors;
     }

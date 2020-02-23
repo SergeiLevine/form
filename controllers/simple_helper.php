@@ -6,21 +6,28 @@ class SimpleHelper {
     }
 
     public function send_email_to_support(){
-        // enter your email here
-        $to = 'serfpnd@gmail.com';
+        // enter your email here v
+        $to = 'google@gmail.com';
         // enter your email there ^
     
         $subject = 'Contact Us';
 
+        $email = $this->data["email"];
+
         // checking if someone tries to inject another email
-        if (preg_match("/%0A/i",$this->data["email"]) || preg_match("/%0D/i",$this->data["email"]) 
-            || preg_match("/\r/i",$this->data["email"]) || preg_match("/\n/i",$this->data["email"])){  
-                echo "here";
+        if (   preg_match("/%0A/i",$email) 
+            || preg_match("/%0D/i",$email) 
+            || preg_match("/\r/i",$email) 
+            || preg_match("/\n/i",$email)
+            || preg_match("/Content-Transfer-Encoding/i",$email)
+            || preg_match("/MIME-Version/i",$email)
+            || preg_match("/Content-Type/i",$email) ){  
+                
                 die("Header injection detected!");
 		}
         // creating email template
-        $headers = "From: " . $this->data["email"] . " \r\n";
-        $headers .= "Reply-To: " . $this->data["email"] . " \r\n";
+        $headers = "From: " . $email . " \r\n";
+        $headers .= "Reply-To: " . $email . " \r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     
@@ -31,7 +38,7 @@ class SimpleHelper {
         $message .= "<tr ><td><strong>Last Name:</strong> </td><td>" . $this->data["last_name"] . "</td></tr>";
         $message .= "<tr ><td><strong>Country:</strong> </td><td>" . $this->data["country"] . "</td></tr>";
         $message .= "<tr ><td><strong>Phone Number:</strong> </td><td>" . $this->data["phone_number"] . "</td></tr>";
-        $message .= "<tr ><td><strong>Email:</strong> </td><td>" . $this->data["email"] . "</td></tr>";
+        $message .= "<tr ><td><strong>Email:</strong> </td><td>" . $email . "</td></tr>";
         $message .= "</table>";
         $message .= "</body></html>";
         

@@ -39,8 +39,11 @@ function getCallAPI($url){
 
     $result = curl_exec($curl);
 
-    if(!$result){die("Connection Failure");}
-
+    if(!$result){
+        trigger_error("Was unable to retrieve data",E_USER_WARNING);
+        return;
+    }
+    
     curl_close($curl);
 
     return json_decode($result, true);
