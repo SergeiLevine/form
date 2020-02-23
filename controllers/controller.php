@@ -1,5 +1,4 @@
 <?
-
 require('validator.php');
 require('simple_helper.php');
 
@@ -20,8 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 //api call to get list of all countries
 function get_list_of_countries(){
+
     $url = "https://restcountries.eu/rest/v2/all?fields=name";
-    return getCallAPI($url);
+    //using session to make only one api call if the user keeps coming back to the contact page
+    
+    if(isset($_SESSION['countries'])){
+        return $_SESSION['countries'];
+    }
+    $countries = $_SESSION['countries'] = getCallAPI($url);
+    return $countries;
 }
 //GET api call
 function getCallAPI($url){
@@ -36,7 +42,7 @@ function getCallAPI($url){
     if(!$result){die("Connection Failure");}
 
     curl_close($curl);
-    
+
     return json_decode($result, true);
 }
 
