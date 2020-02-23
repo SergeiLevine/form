@@ -1,1 +1,15 @@
 .vollkorn{ font-family:'Vollkorn', serif; }
+
+.warning{
+    position: absolute;
+    color: red;
+}
+
+.success{
+    color: green;
+    text-align: center;
+}
+.error{
+    color: red;
+    text-align: center;
+}
