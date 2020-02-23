@@ -21,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function get_list_of_countries(){
 
     $url = "https://restcountries.eu/rest/v2/all?fields=name";
-    //using session to make only one api call if the user keeps coming back to the contact page
     
+    //using session to make only one api call if the user keeps coming back to the contact page
     if(isset($_SESSION['countries'])){
         return $_SESSION['countries'];
     }
