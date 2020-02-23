@@ -7,7 +7,7 @@ class SimpleHelper {
 
     public function send_email_to_support(){
         // enter your email here v
-        $to = 'google@gmail.com';
+        $to = 'amit.tal@orcam.com';
         // enter your email there ^
     
         $subject = 'Contact Us';
